@@ -64,17 +64,24 @@ public class User {
          check = account.setBalanceDrawal(-(amount));
          if (check == 1){
              account.addTransaction(-(amount));
+            // setaccountslist(account);
          }
     }
     public void deposite(Account account,int amount){
         account.setDepositeBalance(amount);
-        setaccountslist(account);
         account.addTransaction(amount);
+        //setaccountslist(account);
         System.out.println("complete");
 
     }
     public void transfer(Account srcAccount,Account destAccount,int amount){
-        int check;
+        srcAccount.setTransferBalance(-(amount));
+        destAccount.setTransferBalance(amount);
+        srcAccount.addTransaction(-(amount));
+        destAccount.addTransaction(amount);
+    }
+    public int checkBalance(Account account){
+        return account.getBalance();
     }
 }
 

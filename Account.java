@@ -55,4 +55,7 @@ public class Account {
     public void setDepositeBalance(int amount){
         balance = balance + amount;
     }
+    public void setTransferBalance(int amount){
+        balance = balance + amount;
+    }
 }

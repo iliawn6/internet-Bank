@@ -132,41 +132,53 @@ public class menu {
 
     }
     public static void transactionMenu(User user,BankingSystem manager ,Account account){
-        System.out.println("1.Withdrawal");
-        System.out.println("2.Deposite");
-        System.out.println("3.Transfer");
-        System.out.println("4.check balance");
-        System.out.println("5.back");
-
         Scanner sc = new Scanner(System.in);
-        int input = sc.nextInt();
-        if (input == 1){
-            System.out.println("Enter amount of withdrawal:");
-            input = sc.nextInt();
-            user.withDrawal(account,input);
-        }
-        else if (input == 2){
-            System.out.println("Enter amount of deposite:");
-            input = sc.nextInt();
-            user.deposite(account,input);
-            manager.setacc(account);
-        }
-        //TODO mablaghe har account to userlist va accounts update beshan
-        else if (input == 3){
-            System.out.println("Enter destination account serial number:");
-            String dest = sc.nextLine();
-            System.out.println("Enter amount of transfer:");
-            input = sc.nextInt();
-        }
-        else if (input == 4){
+        while (true){
+            System.out.println("1.Withdrawal");
+            System.out.println("2.Deposite");
+            System.out.println("3.Transfer");
+            System.out.println("4.check balance");
+            System.out.println("5.back");
 
+            int input = sc.nextInt();
+            if (input == 1){
+                System.out.println("Enter amount of withdrawal:");
+                input = sc.nextInt();
+                user.withDrawal(account,input);
+                //manager.setacc(account);
+            }
+            else if (input == 2){
+                System.out.println("Enter amount of deposite:");
+                input = sc.nextInt();
+                user.deposite(account,input);
+                //manager.setacc(account);
+            }
+            //TODO mablaghe har account to userlist va accounts update beshan
+            else if (input == 3){
+                System.out.println("Enter destination account serial number:");
+                String dest = sc.nextLine();
+                System.out.println("Enter amount of transfer:");
+                input = sc.nextInt();
+                if (manager.findAccount(dest) != null && account.getBalance() >= input){
+                    user.transfer(account,manager.findAccount(dest),input);
+                    System.out.println("completed");
+                }
+                else {
+                    System.out.println("Destination account doesn’t exist or there is not enough money\n" +
+                            "in your account");
+                }
+            }
+            else if (input == 4){
+                System.out.println(user.checkBalance(account));
+            }
+            else if (input == 5){
+                break;
+            }
+            else {
+                System.out.println("wrong input");
+            }
         }
-        else if (input == 5){
 
-        }
-        else {
-            System.out.println("wrong input");
-        }
     }
 
 
