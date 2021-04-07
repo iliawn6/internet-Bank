@@ -6,10 +6,12 @@ public final class transaction{
     private final int amount;
     private final Date date;
 
+
     public transaction(int amount){
         this.amount = amount;
         date = new Date();
     }
+
 
     public void print(){
         if (amount > 0){
@@ -21,4 +23,5 @@ public final class transaction{
             System.out.println(date.toString());
         }
     }
+
 }

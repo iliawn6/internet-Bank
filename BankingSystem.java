@@ -6,23 +6,25 @@ public class BankingSystem {
     private ArrayList<User> users;
     private ArrayList<Account> accounts;
 
+
+
     public BankingSystem(){
         users = new ArrayList<User>();
         accounts = new ArrayList<Account>();
     }
+
+
+
 
     public void register(User user) {
         users.add(user);
     }
 
     public int checkUser(User user) {
-        //int ret=0;
         for (User check : users) {
             if (check.getFirstName().equals(user.getFirstName()) && check.getLastName().equals(user.getLastName())) {
-                System.out.println("this username is already exist");
                 return -1;
             } else if (check.getId().equals(user.getId())) {
-                System.out.println("this ID has been used before");
                 return -2;
             }
         }
@@ -51,6 +53,7 @@ public class BankingSystem {
         User exam = new User("f","l","i","p");
         return exam;
     }
+
     public Account findAccount(String serial){
         Iterator<Account> it = accounts.iterator();
         while (it.hasNext()){
@@ -61,15 +64,57 @@ public class BankingSystem {
         }
         return null;
     }
-    public void setacc(Account account){
+
+    public void addAccount(Account account){
+        accounts.add(account);
+
+    }
+
+    public void removeAccount(Account account){
+        accounts.remove(account);
+
+    }
+
+    public void displayUsers(){
+        int i = 1;
+        for (User dis: users){
+            System.out.println("user" + i + ":" + dis.getFirstName() + "," + dis.getLastName() + "," + dis.getId());
+            i = i + 1;
+        }
+        System.out.println("\n");
+    }
+
+    public void displayAccounts(){
+        int i = 1;
+        for (Account acc: accounts){
+            System.out.println("Account" + i + ":" + acc.getSerial() + "," + acc.getType() + "," + acc.getBalance());
+            i = i + 1;
+        }
+        System.out.println("\n");
+    }
+
+    public int removeUser(String userId){
+        Iterator<User> it = users.iterator();
+        while (it.hasNext()){
+            User check = it.next();
+            if (check.getId().equals(userId)){
+                users.remove(check);
+                return 1;
+            }
+        }
+        return -1;
+    }
+
+    public int removeAccount(String accSerial){
         Iterator<Account> it = accounts.iterator();
         while (it.hasNext()){
             Account check = it.next();
-            if (account.getSerial().equals(check.getSerial())){
-                check = account;
+            if (check.getSerial().equals(accSerial)){
+                accounts.remove(check);
+                return 1;
             }
         }
+        return -1;
     }
-    //TODO injaram check kon
 
 }
